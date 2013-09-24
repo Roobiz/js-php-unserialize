@@ -144,6 +144,12 @@ function unserialize (data) {
           dataoffset = res[0];
           readdata = res[1];
           break;
+        case 'r':
+          readData = read_until(data, dataoffset, ';');
+          chrs = readData[0];
+          readdata = false;
+          dataoffset += chrs + 1;
+          break;
         default:
           error('SyntaxError', 'Unknown / Unhandled data type(s): ' + dtype + ' :: ' + offset + JSON.stringify([dtype, data[offset], data.slice(offset-20, offset + 10), data]));
           break;
